@@ -15,18 +15,28 @@ public class PlayerMotor : MonoBehaviour
     public float gravity = 14.0f;
     public float terminalVelocity = 20.0f;
 
+
     public CharacterController controller;
+    public Animator anim;
     private BaseState state;
+    private bool isPaused;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
+
         state = GetComponent<RunningState>();
         state.Construct();
+
+        isPaused = true;
     }
 
     private void Update()
     {
-        UpdateMotor();
+        if (!isPaused)
+        {
+            UpdateMotor();
+        }
     }
 
     private void UpdateMotor()
@@ -36,6 +46,11 @@ public class PlayerMotor : MonoBehaviour
         moveVector = state.ProcessMotion();
 
         state.Transition();
+
+        anim?.SetBool("IsGrounded", isGrounded);
+
+
+        anim?.SetFloat("Speed", Mathf.Abs(moveVector.z));
 
         controller.Move(moveVector * Time.deltaTime);
     }
@@ -79,5 +94,38 @@ public class PlayerMotor : MonoBehaviour
     public void ApplyGravity()
     {
         verticalVelocity -= gravity * Time.deltaTime;
+        if(verticalVelocity < -terminalVelocity)
+        {
+            verticalVelocity = -terminalVelocity;
+        }
     }
+
+
+    public void PausePlayer()
+    {
+        isPaused = true;
+    }
+
+    public void ResumePlayer()
+    {
+        isPaused = false;
+    }
+
+    public void RespawnPlayer()
+    {
+        ChangeState(GetComponent<RespawnState>());
+    }
+
+
+    public void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        string hitLayerName = LayerMask.LayerToName(hit.gameObject.layer);
+
+        if(hitLayerName == "Death")
+        {
+           ChangeState(GetComponent<DeathState>());
+        }
+
+    }
+
 }

@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunningState : BaseState
+public class FallingState : BaseState
 {
     public override void Construct()
     {
-        motor.verticalVelocity = 0;
+        motor.anim?.SetTrigger("Fall");
     }
     public override Vector3 ProcessMotion()
     {
+        motor.ApplyGravity();
+
+
         Vector3 m = Vector3.zero;
 
         m.x = motor.SnapToLane();
-        m.y = -1.0f;
+        m.y = motor.verticalVelocity;
         m.z = motor.baseRunSpeed;
 
         return m;
@@ -21,8 +24,7 @@ public class RunningState : BaseState
 
     public override void Transition()
     {
-
-        if(InputManager.Instance.SwipeLeft)
+        if (InputManager.Instance.SwipeLeft)
         {
             motor.ChangeLane(-1);
         }
@@ -32,24 +34,10 @@ public class RunningState : BaseState
             motor.ChangeLane(1);
         }
 
-        if (InputManager.Instance.SwipeUp && motor.isGrounded)
+
+        if (motor.isGrounded)
         {
-            motor.ChangeState(GetComponent<JumpingState>());
+            motor.ChangeState(GetComponent<RunningState>());
         }
-
-        if (!motor.isGrounded)
-        {
-            motor.ChangeState(GetComponent<FallingState>());
-        }
-
-        if (InputManager.Instance.SwipeDown)
-        {
-            motor.ChangeState(GetComponent<SlidingState>());
-        }
-
-
- 
-
     }
-
 }

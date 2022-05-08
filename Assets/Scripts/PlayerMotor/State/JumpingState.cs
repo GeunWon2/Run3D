@@ -8,6 +8,8 @@ public class JumpingState : BaseState
     public override void Construct()
     {
         motor.verticalVelocity = jumpForce;
+        motor.anim?.SetTrigger("Jump"); // anim? -> null이면 여기서 중지하지만 null이 아니라면 계속하고 설정 트리거를 수행.
+
     }
 
     public override Vector3 ProcessMotion()
@@ -26,6 +28,9 @@ public class JumpingState : BaseState
 
     public override void Transition()
     {
-        base.Transition();
+        if(motor.verticalVelocity < 0)
+        {
+            motor.ChangeState(GetComponent<FallingState>());
+        }
     }
 }
