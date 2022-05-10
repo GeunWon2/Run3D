@@ -13,11 +13,24 @@ public class GameStateGame : GameState
         GameManager.Instance.motor.ResumePlayer();
         GameManager.Instance.ChangeCamera(GameCamera.Game);
 
-        fishCnt.text = "xTBD";
-        socreCnt.text = "TBD";
+        GameStats.Instance.OnCollectFish += OnCollectFish;
+        GameStats.Instance.OnScoreChange += OnScoreChange;
 
         gameUI.SetActive(true);
     }
+
+    private void OnCollectFish(int amnCollected)
+    {
+        fishCnt.text = GameStats.Instance.FishToText();
+    }
+
+    private void OnScoreChange(float score)
+    {
+        socreCnt.text = GameStats.Instance.ScoreToText();
+
+    }
+
+
     public override void UpdateState()
     {
         GameManager.Instance.worldGeneration.ScanPosition();
@@ -28,5 +41,8 @@ public class GameStateGame : GameState
     public override void Destruct()
     {
         gameUI.SetActive(false);
+
+        GameStats.Instance.OnCollectFish -= OnCollectFish;
+        GameStats.Instance.OnScoreChange -= OnScoreChange;
     }
 }

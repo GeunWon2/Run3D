@@ -23,12 +23,24 @@ public class GameStateDeath : GameState
         deathUI.SetActive(true);
         completionCircle.gameObject.SetActive(true);
 
+        if (SaveManager.Instance.save.HighScore < GameStats.Instance.score)
+        {
+            SaveManager.Instance.save.HighScore = (int)GameStats.Instance.score;
+            currentScore.color = Color.green;
+        }
+        else
+        {
+            currentScore.color = Color.white;
+        }
 
+        SaveManager.Instance.save.Fish += GameStats.Instance.fishCollectedThisSession;
 
-        highScore.text = "HighScore : TBD";
-        currentScore.text = "?1234";
-        fishTotal.text = "Total : TBD";
-        currentFish.text = "?x20";
+        SaveManager.Instance.Save();
+
+        highScore.text = "HighScore : " + SaveManager.Instance.save.HighScore;
+        currentScore.text = GameStats.Instance.ScoreToText();
+        fishTotal.text = "Total fish : " + SaveManager.Instance.save.Fish;
+        currentFish.text = GameStats.Instance.FishToText();
     }
 
     public override void Destruct()
@@ -61,6 +73,6 @@ public class GameStateDeath : GameState
 
         GameManager.Instance.motor.ResetPalyer();
         GameManager.Instance.worldGeneration.ResetWorld();
-      
+        GameManager.Instance.sceneChunkGeneration.ResetWorld();
     }
 }
