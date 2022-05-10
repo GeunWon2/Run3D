@@ -506,7 +506,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1921932352}
         m_TargetAssemblyTypeName: GameStateDeath, Assembly-CSharp
-        m_MethodName: ResumeGame
+        m_MethodName: TryResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5976,6 +5976,7 @@ GameObject:
   - component: {fileID: 1921932352}
   - component: {fileID: 1921932355}
   - component: {fileID: 1921932354}
+  - component: {fileID: 1921932356}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6116,6 +6117,21 @@ MonoBehaviour:
   hatPrefab: {fileID: 3265651879530368129, guid: fd1fdc5a223cd8743ac1b9148420d153,
     type: 3}
   hatContainer: {fileID: 2133237969}
+--- !u!114 &1921932356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921932347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03071e2b07e2499469149226140d4bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameID: 4748317
+  rewardedVideoPlacementId: Rewarded_Android
+  testMode: 1
 --- !u!1 &1933552581
 GameObject:
   m_ObjectHideFlags: 0
