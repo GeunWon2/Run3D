@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bb7bdb4aed1ea04f9a9ffcef243fcaf, type: 3}
-  m_Name: TestHat2
+  m_Name: 01_AntiesHat
   m_EditorClassIdentifier: 
-  ItemName: '#2'
-  ItemPrice: 10
-  Thumbnail: {fileID: 21300000, guid: abb20b493de1b8a4195ea03db01cdf11, type: 3}
+  ItemName: AntiesHat
+  ItemPrice: 5
+  Thumbnail: {fileID: 21300000, guid: cba15b3a2533ec84990ffc42bf62cbcf, type: 3}
   Model: {fileID: 100000, guid: 307f4aff9d761194ea558fc88d9d3b79, type: 3}

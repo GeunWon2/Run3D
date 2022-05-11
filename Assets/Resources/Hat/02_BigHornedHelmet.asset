@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bb7bdb4aed1ea04f9a9ffcef243fcaf, type: 3}
-  m_Name: NoneHat
+  m_Name: 02_BigHornedHelmet
   m_EditorClassIdentifier: 
-  ItemName: None
-  ItemPrice: 0
-  Thumbnail: {fileID: 0}
-  Model: {fileID: 6152246584117758451, guid: a9fbdba3e56a9a94286d1c6727f171e6, type: 3}
+  ItemName: BigHornedHelmet
+  ItemPrice: 10
+  Thumbnail: {fileID: 21300000, guid: 4d83ad9ff812f744793e6eb8f83c2f9b, type: 3}
+  Model: {fileID: 100000, guid: a41b2b28d2c370148b5fcb7cb91b34a4, type: 3}

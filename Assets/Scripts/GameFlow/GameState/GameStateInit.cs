@@ -8,6 +8,7 @@ public class GameStateInit : GameState
     public GameObject menuUI;
     [SerializeField] private TextMeshProUGUI highscoreText;
     [SerializeField] private TextMeshProUGUI fishcntText;
+    [SerializeField] private AudioClip menuLoopMusic;
 
 
     public override void Construct()
@@ -18,6 +19,8 @@ public class GameStateInit : GameState
         fishcntText.text = "Fishcnt : " + SaveManager.Instance.save.Fish.ToString();
 
         menuUI.SetActive(true);
+
+        //SoundManager.Instance.PlayMusicWithXFad(menuLoopMusic, 0.5f);
     }
 
     public override void Destruct()
